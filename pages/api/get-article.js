@@ -1,4 +1,5 @@
 import { connectToDatabase } from '../../lib/mongodb';
+import { MongoClient } from 'mongodb';
 
 async function getArticle(req, res){
     const client = await connectToDatabase();
