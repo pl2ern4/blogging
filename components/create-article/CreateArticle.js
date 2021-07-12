@@ -15,7 +15,7 @@ import {
 
 const CreateArticle = ({ submitStatus, submitForm }) => {
   const [article, setArticle] = useState("");
-  const router = useRouter()
+  const router = useRouter();
   const handleSubmit = (data) => {
     submitForm(data);
   };

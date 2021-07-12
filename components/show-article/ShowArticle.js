@@ -1,6 +1,8 @@
-import Image from 'next/image'
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 import {
     Articles,
+    ArticleDelete,
     ArticleTitleProfileWrapper,
     ArticleInfo,
     ArticleItem,
@@ -13,8 +15,16 @@ import {
     ProfileImg
 } from './styles';
 
-const ShowArticle = ({ articles }) => {
-
+const ShowArticle = ({ articles, showDelete }) => {
+  const router = useRouter();
+  const handleDelete = async (params)=>{
+    const resp = await fetch(`/api/delete-article/${params}`, {
+      method: "DELETE"
+    });
+    if(resp.ok){
+      router.push('/');
+    }
+  }
   if(articles.length===0){
     return <Articles><h1> No Article to show </h1></Articles>
   }
@@ -25,9 +35,10 @@ const ShowArticle = ({ articles }) => {
         <ArticleItem key={`article-${obj.id}`}>
           <ArticleTitleProfileWrapper>
             <ProfileImg>
-              <Image style={{'border-radius':'50%'}} src={obj.img} alt={obj.createdBy} width="100" height="100"/>
+              <Image src={obj.img} alt={obj.createdBy} width="100" height="100"/>
             </ProfileImg>
             <ArticleTitle>{obj.title}</ArticleTitle>
+            <ArticleDelete onClick={()=>handleDelete(obj.id)}>Delete it...</ArticleDelete>
           </ArticleTitleProfileWrapper>
           <ArticleInfo>
             <CreatedBy>

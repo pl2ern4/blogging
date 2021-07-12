@@ -3,7 +3,6 @@ import { HeaderWrapper, TitleWrapper, LoginWrapper } from './styles';
 import LoggedIn from '../logged-in';
 import {Application} from '../../context/application-context/ApplicationContext';
 import { useRouter } from 'next/router'
-import { signout } from 'next-auth/client';
 
 const Header = ({ user, signout }) => {
     const userProfile = useContext(Application);

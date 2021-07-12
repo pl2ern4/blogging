@@ -1,4 +1,6 @@
 import { signout, getSession } from "next-auth/client";
+import mongodb from 'mongodb';
+
 import HeaderWrapper from "../components/header";
 import BasePage from "../components/base-page";
 
@@ -45,7 +47,7 @@ export async function getServerSideProps(req, res) {
       }
       return res.map(({ _id, date_of_creation, title, createdBy, article,img }) => {
         return {
-          id: JSON.stringify(_id),
+          id: mongodb.ObjectId(_id).toString(),
           title,
           img,
           createdBy,
