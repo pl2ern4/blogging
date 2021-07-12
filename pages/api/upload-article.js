@@ -40,7 +40,6 @@ apiRoute.post(async (req, res) => {
           data: articles
         }
       }
-      console.log(">>>>", articles);
       const savedMessage = await saveFile({article: articles,title: fields.title, img:fields.img, createdBy: fields.createdBy})
       res.status(200).json({...savedMessage});
     }) 
@@ -51,7 +50,7 @@ export default apiRoute;
 
 const saveFile = async ({...data}) => {
   const client =await connectToDatabase();
-  const collection = client.db.collection('article'); console.log(collection);
-  const savedData = await collection.insertOne({...data, date_of_creation: new Date(Date.now()).toISOString()}); console.log(savedData);
+  const collection = client.db.collection('article');
+  const savedData = await collection.insertOne({...data, date_of_creation: new Date(Date.now()).toISOString()});
   return{ok: savedData.result.ok};
 };
