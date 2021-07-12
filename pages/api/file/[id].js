@@ -1,6 +1,5 @@
 import { ObjectId } from "mongodb";
 import { connectToDatabase } from "../../../lib/mongodb";
-import fs from 'fs';
 import mongodb from 'mongodb';
 
 async function fetchFile(file, res){
