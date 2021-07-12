@@ -22,3 +22,4 @@ yarn dev
 - Make application to import files
 - add unit test cases for individual files
 - add lazy load
+- few functions can be refactor

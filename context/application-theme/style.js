@@ -7,7 +7,7 @@ const GlobalStyle = createGlobalStyle`
 
     html, body{
         width:100%;
-        height: 100%;
+        height: max-content;
         margin: 0; 
         font-family:Verdana;
         #__next{
@@ -15,7 +15,18 @@ const GlobalStyle = createGlobalStyle`
             width: 100%;
         }
     }
-    
+    body{
+        &::-webkit-scrollbar {
+            width: 0.5rem;
+        }
+        &::-webkit-scrollbar-track {
+            color: darkgray;
+            
+        }
+        &::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+          }
+    }
 `;
 const theme = {
     colors: {

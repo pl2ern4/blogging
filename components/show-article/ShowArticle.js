@@ -22,7 +22,7 @@ const ShowArticle = ({ articles, showDelete }) => {
       method: "DELETE"
     });
     if(resp.ok){
-      router.push('/');
+      router.push(router.route);
     }
   }
   if(articles.length===0){
@@ -38,7 +38,7 @@ const ShowArticle = ({ articles, showDelete }) => {
               <Image src={obj.img} alt={obj.createdBy} width="100" height="100"/>
             </ProfileImg>
             <ArticleTitle>{obj.title}</ArticleTitle>
-            <ArticleDelete onClick={()=>handleDelete(obj.id)}>Delete it...</ArticleDelete>
+            {showDelete && <ArticleDelete onClick={()=>handleDelete(obj.id)}>Delete it...</ArticleDelete>}
           </ArticleTitleProfileWrapper>
           <ArticleInfo>
             <CreatedBy>
