@@ -36,7 +36,7 @@ const ShowArticle = ({ articles }) => {
             </CreatedOn>
           </ArticleInfo>
           <ArticleContent>
-            {typeof obj.article !== 'string' ? (
+            {!!obj.article && typeof obj.article !== 'string' ? (
               <ArticleFile download href={obj.article[0]}>
                 Download file
               </ArticleFile>

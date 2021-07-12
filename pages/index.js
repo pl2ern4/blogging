@@ -40,7 +40,7 @@ export async function getServerSideProps(req, res) {
   const con = await connectToDatabase();
   const collection = con.db.collection("article");
   const articles = await collection
-    .find({})
+    .find({'article': { $exists: true, $ne: null } })
     .toArray()
     .then((res) => {
       if (!res) {
@@ -52,7 +52,7 @@ export async function getServerSideProps(req, res) {
           title,
           createdBy,
           creation_time: date_of_creation,
-          article: typeof article === "object" ? ["file.xlsx"] : article,
+          article: article,
         };
       });
     });
