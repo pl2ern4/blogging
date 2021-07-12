@@ -1,27 +1,24 @@
 import { signout, getSession } from "next-auth/client";
-import ApplicationContext from '../context/application-context';
 import HeaderWrapper from "../components/header";
 import BasePage from "../components/base-page";
 
 import { connectToDatabase } from "../lib/mongodb";
-import { useContext } from "react";
+import { useState } from "react";
 
 export default function Home({ user, articles }) {
-  const value = useContext(ApplicationContext);
+  const [submit, setSubmit] = useState();
   const submitForm = async (params) => {
-    params.append("createdBy", user.email);
-    params.append("img", user.image);
+    const data = {...params, createdBy: user.email, img: user.image};
     const response = await fetch("/api/upload-article", {
       method: "POST",
-      body: params,
+      body: JSON.stringify(data)
     });
-    debugger;
-    value.dispatch('UPDATE_SUBMIT_STATUS',{createSubmit:response.ok })
+    setSubmit(response.ok?{}:{error:'Some issue going on, Please try later'})
   };
   return (
     <div>
       <HeaderWrapper user={user} signout={signout} />
-      <BasePage submitForm={submitForm} articles={articles} />
+      <BasePage submit={submit} submitForm={submitForm} articles={articles} />
     </div>
   );
 }
@@ -46,10 +43,11 @@ export async function getServerSideProps(req, res) {
       if (!res) {
         return [];
       }
-      return res.map(({ _id, date_of_creation, title, createdBy, article }) => {
+      return res.map(({ _id, date_of_creation, title, createdBy, article,img }) => {
         return {
           id: JSON.stringify(_id),
           title,
+          img,
           createdBy,
           creation_time: date_of_creation,
           article: article,

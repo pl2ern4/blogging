@@ -1,4 +1,5 @@
 import { useFormik } from "formik";
+import { useRouter } from 'next/router'
 import validate from "./validate";
 import { useEffect, useState } from "react";
 import {
@@ -14,12 +15,9 @@ import {
 
 const CreateArticle = ({ submitStatus, submitForm }) => {
   const [article, setArticle] = useState("");
-  const handleSubmit = (e) => {
-    const formData = new FormData();
-    article && formData.set("article", article[1]);
-    e.data && formData.set("article", e.data);
-    formData.append("title", e.title);
-    submitForm(formData);
+  const router = useRouter()
+  const handleSubmit = (data) => {
+    submitForm(data);
   };
 
   const formik = useFormik({
@@ -39,9 +37,10 @@ const CreateArticle = ({ submitStatus, submitForm }) => {
   const handleOnChangeSubmitStatus = () => {
     if (Object.keys(submitStatus).length === 0) {
       formik.resetForm();
+      router.push('/');
     }
-    if (Object.keys(submitStatus).length > 0) {
-      formik.setFieldError("error", submitStatus.message);
+    if ('error' in submitStatus) {
+      formik.setFieldError("error", submitStatus.error);
     }
   };
 

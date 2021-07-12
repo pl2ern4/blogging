@@ -1,5 +1,7 @@
+import Image from 'next/image'
 import {
     Articles,
+    ArticleTitleProfileWrapper,
     ArticleInfo,
     ArticleItem,
     ArticleContent,
@@ -7,8 +9,9 @@ import {
     ArticleText,
     ArticleTitle,
     CreatedBy,
-    CreatedOn
-} from "./styles";
+    CreatedOn,
+    ProfileImg
+} from './styles';
 
 const ShowArticle = ({ articles }) => {
 
@@ -20,7 +23,12 @@ const ShowArticle = ({ articles }) => {
     <Articles>
       {articles.map((obj) => (
         <ArticleItem key={`article-${obj.id}`}>
-          <ArticleTitle>{obj.title}</ArticleTitle>
+          <ArticleTitleProfileWrapper>
+            <ProfileImg>
+              <Image style={{'border-radius':'50%'}} src={obj.img} alt={obj.createdBy} width="100" height="100"/>
+            </ProfileImg>
+            <ArticleTitle>{obj.title}</ArticleTitle>
+          </ArticleTitleProfileWrapper>
           <ArticleInfo>
             <CreatedBy>
                 <label>

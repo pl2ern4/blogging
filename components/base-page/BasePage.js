@@ -4,7 +4,7 @@ import { AddArticleIcon, ToolTip } from './styles';
 import ApplicationModal from '../application-modal';
 
 const CreateArticle = lazy(()=>import('../create-article'));
-const BasePage = ({articles, submitForm}) => {
+const BasePage = ({articles, submit, submitForm}) => {
     const [showForm, setShowForm] = useState();
 
     const handleClick = () => setShowForm(!showForm);
@@ -19,7 +19,7 @@ const BasePage = ({articles, submitForm}) => {
             {showForm && 
             <Suspense fallback={<div>Loading...</div>}>
                 <ApplicationModal handleClick={handleClick} isOpen={showForm}>
-                    <CreateArticle submitForm={submitForm}/>
+                    <CreateArticle submitStatus={submit} submitForm={submitForm}/>
                 </ApplicationModal>
             </Suspense>}
         </>

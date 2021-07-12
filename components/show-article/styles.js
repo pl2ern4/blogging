@@ -43,6 +43,18 @@ const ArticleInfo = styled.div`
     display: flex;
     
 `;
+const ArticleTitleProfileWrapper = styled.div`
+   display:flex;
+`;
+
+const ProfileImg = styled.span`
+  height:1.5rem;
+  width:1.5rem;
+  margin: 0 0.5rem;
+  img{
+      border-radius: 50%;
+  }
+`;
 
 export {
     Articles,
@@ -53,5 +65,7 @@ export {
     ArticleText,
     ArticleTitle,
     CreatedBy,
-    CreatedOn
+    CreatedOn,
+    ProfileImg,
+    ArticleTitleProfileWrapper
 }
